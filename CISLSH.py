@@ -2,7 +2,7 @@ import warnings
 warnings.filterwarnings("ignore")
 import numpy as np
 
-def CISLSH(Data, label, W, M, L, k):
+def CISLSH(Data, label, W, M, L, eta):
 
     num_samples, Dim = Data.shape
     a = np.random.normal(0, 1, [M * L, Dim])
@@ -42,7 +42,7 @@ def CISLSH(Data, label, W, M, L, k):
         final_buckets[current_bucket].append(sample)
 
         for other_sample in list(unassigned_samples):
-            if vote_matrix[sample, other_sample] >= average_non_zero + k:
+            if vote_matrix[sample, other_sample] >= average_non_zero + eta:
                 final_buckets[current_bucket].append(other_sample)
                 unassigned_samples.remove(other_sample)
     # -------------------------分桶完成-------------------------#
