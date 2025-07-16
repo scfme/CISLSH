@@ -52,8 +52,11 @@ def CISLSH(Data, label, W, M, L, eta):
         distances = np.linalg.norm(Data[indices] - center_bucket, axis=1).astype(np.float64)
 
         if np.max(distances) >= 0.005:
-            min_distance_ind = np.argmin(distances)
-            class_indices = indices[min_distance_ind]
+            #min_distance_ind = np.argmin(distances)
+            min_val = np.min(distances)
+            all_min_ind = np.where(distances == min_val)[0]
+            random_min_ind = random.choice(all_min_ind)
+            class_indices = indices[random_min_ind]
             select_data.append(class_indices)
     # "-------------------------选择完成----------------------"#
 
